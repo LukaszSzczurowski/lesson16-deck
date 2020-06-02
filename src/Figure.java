@@ -16,7 +16,6 @@ public enum Figure {
 
     private String polishName;
     private String englishName;
-    private static final int MAX_FIGURE_NUMBER_IN_DECK = 13;
 
     Figure(String polishName, String englishName) {
         this.polishName = polishName;

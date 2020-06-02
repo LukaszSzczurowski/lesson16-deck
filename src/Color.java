@@ -6,7 +6,6 @@ public enum Color {
 
     private String polishColor;
     private String englishColor;
-    private static final int MAX_COLOR_IN_DECK = 4;
 
     Color(String polishColor, String englishColor) {
         this.polishColor = polishColor;
