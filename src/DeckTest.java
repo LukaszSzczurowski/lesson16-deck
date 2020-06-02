@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class DeckTest {
     public static void main(String[] args) {
         GenerateDecks cards = new GenerateDecks();
-        boolean err = true;
         Scanner scanner = new Scanner(System.in);
+        boolean err = true;
 
         System.out.println("Jaką talię wybierasz PL czy EN ?");
         while (err) {
@@ -15,14 +15,10 @@ public class DeckTest {
                 String choose = scanner.nextLine();
                 cards.generatorForUser(choose);
                 err = false;
-            } catch (NullPointerException e) {
-                e.getMessage();
-            } catch (NoSuchElementException e) {
-                System.err.println("Nie ma takiej taliji. Spróbuj ponownie");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Nie ma takiej tali. Wpisz poprawnie jeszcze raz");
             }
         }
         System.out.println("Koniec");
-
-
     }
 }

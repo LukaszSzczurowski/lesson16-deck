@@ -5,33 +5,39 @@ public class GenerateDecks {
     private static final String PL = "PL";
     private static final String EN = "EN";
 
-    public void generatorForUser(String chose) throws NullPointerException {
-        if (chose.equalsIgnoreCase(PL))
-            System.out.println(generatePolishDeck());
-        else if (chose.equalsIgnoreCase(EN))
-            System.out.println(generateEnglisDeck());
+    public void generatorForUser(String chose) {
+        if (chose.equalsIgnoreCase(PL)){
+            List<Card> polishDeck = generateDeck();
+            printPolishDeck(polishDeck);
+        }
+        else if (chose.equalsIgnoreCase(EN)){
+            List<Card> englishDeck = generateDeck();
+            printEnglishDeck(englishDeck);
+        }
+        else
+            throw new IllegalArgumentException("Nie ma takiej nazwy");
     }
 
-    private List<String> generatePolishDeck() {
-        String[] fig = Figures.createPolishFigure();
-        String[] col = Colors.createPolishColor();
-        return getStringStringMap(fig, col);
+    private void printEnglishDeck(List<Card> englishDeck) {
+        for (Card card : englishDeck) {
+            System.out.println(card.getFigure().getEnglishName() + " of " + card.getColor().getEnglishColor());
+        }
     }
 
-    private List<String> generateEnglisDeck() {
-        String[] fig = Figures.createEnglishFigure();
-        String[] col = Colors.createEnglishColor();
-        return getStringStringMap(fig, col);
+    private void printPolishDeck(List<Card> polishDeck) {
+        for (Card card : polishDeck) {
+            System.out.println(card.getFigure().getPolishName() + " " + card.getColor().getPolishColor());
+        }
     }
 
-    private List<String> getStringStringMap(String[] fig, String[] col) {
-        List<String> deck = new LinkedList<>();
-        for (int i = 0; i < col.length; i++) {
-            System.out.println(col[i]);
-            for (int j = 0; j < fig.length; j++) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(fig[j] + " " + col[i] + "\n");
-                deck.add(sb.toString());
+    private List<Card> generateDeck() {
+        List<Card> deck = new ArrayList<>();
+        Figure[] figures = Figure.values();
+        Color[] colors = Color.values();
+
+        for (Color color : colors) {
+            for (Figure figure : figures) {
+                deck.add(new Card(color, figure));
             }
         }
         return deck;
